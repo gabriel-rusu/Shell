@@ -1,14 +1,15 @@
 CXX = g++
 CXXFLAGS = -Wall -g -std=c++11
 EXE = mini-shell
+SOURCE_PATH = ./src/
 
-build: main.o
-	$(CXX) $(CXXFLAGS) main.o -o shell
+build: $(SOURCE_PATH)command.o
+	$(CXX) $(CXXFLAGS) main.cpp $^ -o mini-shell
 
-main.o: main.cpp
+$(SOURCE_PATH)command.o: $(SOURCE_PATH)command.cpp
 
 .PHONy: clean
 
 clean:
-	rm *.o mini-shell
+	rm *.o $(SOURCE_PATH)*.o mini-shell
 
