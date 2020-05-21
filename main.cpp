@@ -9,14 +9,13 @@ int main()
 {
     Shell shell;
     init();
-    
+
     while (true)
     {
         std::cout << "~>";
         std::cin >> shell;
         shell.execute();
     }
-
     return 0;
 }
 
