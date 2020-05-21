@@ -3,22 +3,25 @@
 #include "src/command.hpp"
 #include "src/shell.hpp"
 
+void init();
+
 int main()
 {
-
-    std::string command_string;
     Shell shell;
-
-    std::cout << "Welcome to Mini-Sell v.1" << std::endl;
-    std::cout << "Enter your commands bellow" << std::endl;
+    init();
+    
     while (true)
     {
         std::cout << "~>";
-        std::getline(std::cin, command_string);
-        std::cout << "Executing the command: " << command_string << std::endl;
-        shell.execute(command_string);
-        system(command_string.c_str());
+        std::cin >> shell;
+        shell.execute();
     }
 
     return 0;
+}
+
+void init()
+{
+    std::cout << "Welcome to Mini-Sell v1.2" << std::endl;
+    std::cout << "Enter your commands bellow" << std::endl;
 }
