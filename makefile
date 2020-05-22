@@ -10,8 +10,15 @@ $(SOURCE_PATH)command.o: $(SOURCE_PATH)command.cpp
 
 $(SOURCE_PATH)shell.o: $(SOURCE_PATH)shell.cpp
 
+save: clean
+	git add -A	&&\
+	echo Enter commit message: &&\
+	read line &&\
+	git commit -m "$$line" &&\
+	git push
+
 .PHONy: clean
 
 clean:
-	rm *.o $(SOURCE_PATH)*.o mini-shell
+	rm -f *.o $(SOURCE_PATH)*.o mini-shell
 

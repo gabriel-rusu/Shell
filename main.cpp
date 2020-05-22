@@ -12,7 +12,7 @@ int main()
 
     while (true)
     {
-        std::cout << "my-shell>";
+        std::cout << "~>";
         std::cin >> shell;
         shell.execute();
     }
