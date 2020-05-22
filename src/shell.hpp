@@ -12,6 +12,8 @@ private:
 
 public:
     Shell();
-    bool execute();
+    bool execute(command comm);
     friend std::istream &operator>>(std::istream& is,Shell &sh);
+    void init();
+    void start();
 };

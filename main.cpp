@@ -8,19 +8,8 @@ void init();
 int main()
 {
     Shell shell;
-    init();
-
-    while (true)
-    {
-        std::cout << "~>";
-        std::cin >> shell;
-        shell.execute();
-    }
+    shell.init();
+    shell.start();
     return 0;
 }
 
-void init()
-{
-    std::cout << "Welcome to Mini-Sell v1.2" << std::endl;
-    std::cout << "Enter your commands bellow" << std::endl;
-}

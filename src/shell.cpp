@@ -12,8 +12,9 @@ Shell::Shell()
     this->command_history.push_back(start_command);
 }
 
-bool Shell::execute()
+bool Shell::execute(command comm)
 {
+    this->entered_command = comm;
     this->command_history.push_back(this->entered_command);
     if (search_known_commands())
         return true;
@@ -57,4 +58,20 @@ bool Shell::send_to_os()
     else
         cout << "Error executing the task";
     return true;
+}
+
+void Shell::init()
+{
+    std::cout << "Welcome to Mini-Sell v1.2" << std::endl;
+    std::cout << "Enter your commands bellow" << std::endl;
+}
+
+void Shell::start(){
+    string command_string;
+    while (true)
+    {
+        std::cout << "~>";
+        getline(cin,command_string);
+        this->execute(command_string);
+    }
 }
