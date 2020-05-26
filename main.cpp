@@ -13,8 +13,3 @@ int main()
     shell.run();
 }
 
-void init()
-{
-    std::cout << "Welcome to Mini-Sell v1.2" << std::endl;
-    std::cout << "Enter your commands bellow" << std::endl;
-}

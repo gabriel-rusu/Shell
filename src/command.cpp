@@ -49,3 +49,10 @@ std::ostream &operator<<(std::ostream &os, const command &comm)
         os << argument << " ";
     return os;
 }
+
+istream &operator>>(istream &is, command comm){
+    string command_string;
+    getline(is,command_string);
+    comm = command_string;
+    return is;
+}

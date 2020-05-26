@@ -18,4 +18,5 @@ public:
     friend void execute(command entered_command);
     bool operator==(command &new_command);
     friend std::ostream &operator<<(std::ostream &os,const command &comm);
+    friend std::istream &operator>>(std::istream &is, command comm);
 };
