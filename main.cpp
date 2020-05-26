@@ -8,15 +8,9 @@ void init();
 int main()
 {
     Shell shell;
+    
     init();
-
-    while (true)
-    {
-        std::cout << "~>";
-        std::cin >> shell;
-        shell.execute();
-    }
-    return 0;
+    shell.run();
 }
 
 void init()

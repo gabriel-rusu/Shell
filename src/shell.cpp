@@ -2,7 +2,7 @@
 #include <string>
 #include <unistd.h>
 #include <sys/types.h>
-#include<sys/wait.h> 
+#include <sys/wait.h>
 
 using namespace std;
 
@@ -46,7 +46,7 @@ bool Shell::send_to_os()
     int len = entered_command.arguments.size();
     char **argv = new char *[len + 2];
     argv[0] = cmd;
-    for (int i = 1; i < len+1; i++)
+    for (int i = 1; i < len + 1; i++)
         argv[i] = const_cast<char *>(entered_command.arguments[i - 1].c_str());
     argv[len + 1] = NULL;
     int pid = fork();
@@ -57,4 +57,16 @@ bool Shell::send_to_os()
     else
         cout << "Error executing the task";
     return true;
+}
+
+void Shell::run()
+{
+    string command_string;
+    while (true)
+    {
+        std::cout << "~>";
+        getline(cin, command_string);
+        this->entered_command = command_string;
+        this->execute();
+    }
 }

@@ -13,5 +13,6 @@ private:
 public:
     Shell();
     bool execute();
+    void run();
     friend std::istream &operator>>(std::istream& is,Shell &sh);
 };
