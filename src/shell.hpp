@@ -12,12 +12,7 @@ private:
 
 public:
     Shell();
-<<<<<<< HEAD
-    bool execute();
-    void run();
-=======
     bool execute(command comm);
->>>>>>> 6bdc2d810b3bc1feaffba04aacabae1eeba858c1
     friend std::istream &operator>>(std::istream& is,Shell &sh);
     void init();
     void start();

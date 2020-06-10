@@ -9,7 +9,7 @@ int main()
 {
     Shell shell;
     
-    init();
-    shell.run();
+    shell.init();
+    shell.start();
 }
 

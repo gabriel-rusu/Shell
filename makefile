@@ -1,10 +1,10 @@
 CXX = g++
-CXXFLAGS = -Wall -g -std=c++11
-EXE = mini-shell
+CXXFLAGS = -Wall -g -std=c++14
+EXE = shell
 SOURCE_PATH = ./src/
 
 build: $(SOURCE_PATH)command.o $(SOURCE_PATH)shell.o
-	$(CXX) $(CXXFLAGS) main.cpp $^ -o mini-shell
+	$(CXX) $(CXXFLAGS) main.cpp $^ -o  $(EXE)
 
 $(SOURCE_PATH)command.o: $(SOURCE_PATH)command.cpp
 
@@ -20,5 +20,5 @@ save: clean
 .PHONy: clean
 
 clean:
-	rm -f *.o $(SOURCE_PATH)*.o mini-shell
+	rm -f *.o $(SOURCE_PATH)*.o $(EXE)
 
