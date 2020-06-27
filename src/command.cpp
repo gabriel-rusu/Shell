@@ -48,7 +48,7 @@ char *const *command::getArguments()
     char **arguments = new char *[number_of_arguments+2];
     arguments[0] = const_cast<char *>(this->getCommandName());
     for (int index = 1; index < number_of_arguments+1; index++)
-        arguments[index] = const_cast<char *>(this->arguments[index].c_str());
+        arguments[index] = const_cast<char *>(this->arguments[index-1].c_str());
     arguments[number_of_arguments+1] = NULL;
 
     return arguments;
