@@ -24,7 +24,7 @@ bool shell::start()
     this->state = RUNNING;
     command comm;
     cout << "~>";
-    while (cin>>comm)
+    while (cin >> comm)
     {
         this->create_in_subshell(comm);
         cout << "~>";

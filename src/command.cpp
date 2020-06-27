@@ -45,11 +45,11 @@ pair<string, vector<string>> command::parseRaw(string command_string)
 char *const *command::getArguments()
 {
     int number_of_arguments = this->arguments.size();
-    char **arguments = new char *[number_of_arguments+2];
+    char **arguments = new char *[number_of_arguments + 2];
     arguments[0] = const_cast<char *>(this->getCommandName());
-    for (int index = 1; index < number_of_arguments+1; index++)
-        arguments[index] = const_cast<char *>(this->arguments[index-1].c_str());
-    arguments[number_of_arguments+1] = NULL;
+    for (int index = 1; index < number_of_arguments + 1; index++)
+        arguments[index] = const_cast<char *>(this->arguments[index - 1].c_str());
+    arguments[number_of_arguments + 1] = NULL;
 
     return arguments;
 }
@@ -58,7 +58,7 @@ const char *command::getCommandName()
     return this->commandName.c_str();
 }
 
-std::ostream &operator<<(std::ostream &os,const command &command)
+std::ostream &operator<<(std::ostream &os, const command &command)
 {
     os << command.commandName;
     return os;
