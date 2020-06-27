@@ -18,7 +18,6 @@ save: clean
 	git push
 
 .PHONy: clean
-
 clean:
 	rm -f *.o $(SOURCE_PATH)*.o $(EXE)
 
