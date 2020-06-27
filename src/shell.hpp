@@ -1,19 +1,19 @@
-#include "command.hpp"
-#include <vector>
+#pragma once
 #include <iostream>
+#include "command.hpp"
 
-class Shell
+class shell
 {
 private:
-    std::vector<command> command_history;
-    command entered_command;
-    bool search_known_commands();
-    bool send_to_os();
+    const int IDLE = 0;
+    const int RUNNING = 1;
+
+    int pid;
+    int state;
+    bool create_in_subshell(const command &comm);
 
 public:
-    Shell();
-    bool execute(command comm);
-    friend std::istream &operator>>(std::istream& is,Shell &sh);
-    void init();
-    void start();
-};
+    bool execute(const command &comm);
+    bool init();
+    bool start();
+}

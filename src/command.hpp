@@ -1,21 +1,19 @@
 #pragma once
+#include <utility>
+#include <iostream>
 #include <string>
 #include <vector>
-#include <iostream>
 
-class Shell;
+class command{
+    private:
+        std::string commandName;
+        std::vector<std::string> arguments;
+        std::pair<std::string,std::vector<std::string>> parseRaw(std::string command_string);
+        bool assign(std::string &command_string);
 
-class command
-{
-private:
-    std::vector<std::string> arguments;
-    std::string command_name;
-    void parse(std::string entered_command);
-    friend Shell;
-
-public:
-    command(std::string command_string = "");
-    bool operator==(command &new_command);
-    friend std::ostream &operator<<(std::ostream &os,const command &comm);
-    friend std::istream &operator>>(std::istream &is, command comm);
-};
+    public:
+        command(std::string & = "");
+        friend std::istream& operator>>(std::istream &is,command &newCommand);
+        char *const * getArguments();
+        const char * getCommandName();
+}

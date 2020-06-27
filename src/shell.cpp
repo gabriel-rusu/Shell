@@ -6,72 +6,44 @@
 
 using namespace std;
 
-Shell::Shell()
+bool shell::execute(const command &comm)
 {
-    command start_command("mini-shell");
-    this->command_history.push_back(start_command);
+    execvp(comm.getCommandName(), comm.getArguments());
 }
-
-bool Shell::execute(command comm)
+bool shell::init()
 {
-    this->entered_command = comm;
-    this->command_history.push_back(this->entered_command);
-    if (search_known_commands())
-        return true;
-    return send_to_os();
+    this->pid = getpid();
+    this->state = IDLE;
 }
-
-std::istream &operator>>(std::istream &is, Shell &sh)
+bool shell::start()
 {
-    string command_string;
-    getline(is, command_string);
-    sh.entered_command = command_string;
-    return is;
-}
-
-bool Shell::search_known_commands()
-{
-    command cmd = string("history");
-    if (this->entered_command == cmd)
+    this->state = RUNNING;
+    command comm;
+    cout << "~>";
+    while (cin>>comm)
     {
-        for (command comm : this->command_history)
-            cout << comm << endl;
+        this->create_in_subshell(comm);
+        cout << "~>"
+    }
+}
+
+bool create_in_subshell(const command &comm)
+{
+    int pid = fork();
+    if (pid > 0)
+    {
+        wait(pid);
         return true;
     }
-    return false;
-}
-
-bool Shell::send_to_os()
-{
-    char *cmd = const_cast<char *>(entered_command.command_name.c_str());
-    int len = entered_command.arguments.size();
-    char **argv = new char *[len + 2];
-    argv[0] = cmd;
-    for (int i = 1; i < len + 1; i++)
-        argv[i] = const_cast<char *>(entered_command.arguments[i - 1].c_str());
-    argv[len + 1] = NULL;
-    int pid = fork();
-    if (pid == 0)
-        execvp(cmd, argv);
-    else if (pid > 0)
-        wait(NULL);
-    else
-        cout << "Error executing the task";
-    return true;
-}
-
-void Shell::init()
-{
-    std::cout << "Welcome to Mini-Sell v1.2" << std::endl;
-    std::cout << "Enter your commands bellow" << std::endl;
-}
-
-void Shell::start(){
-    string command_string;
-    while (true)
+    else if (pid == 0)
     {
-        std::cout << "~>";
-        getline(cin,command_string);
-        this->execute(command_string);
+        shell sub_shell;
+        sub_shell.execute(comm);
+        return true;
+    }
+    else
+    {
+        cout << "Error executing the command: " << comm << endl;
+        return false;
     }
 }
