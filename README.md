@@ -1,1 +1,1 @@
-<h1>Shell</h1>
+<h1 align="center">Shell</h1>
