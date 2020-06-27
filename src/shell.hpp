@@ -10,10 +10,10 @@ private:
 
     int pid;
     int state;
-    bool create_in_subshell(const command &comm);
+    bool create_in_subshell(command &comm);
 
 public:
-    bool execute(const command &comm);
+    bool execute(command &comm);
     bool init();
     bool start();
-}
+};

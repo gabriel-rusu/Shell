@@ -7,9 +7,9 @@ void init();
 
 int main()
 {
-    Shell shell;
+    shell current_shell;
     
-    shell.init();
-    shell.start();
+    current_shell.init();
+    current_shell.start();
 }
 

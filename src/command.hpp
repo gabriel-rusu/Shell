@@ -12,8 +12,9 @@ class command{
         bool assign(std::string &command_string);
 
     public:
-        command(std::string & = "");
+        command(std::string  = "");
         friend std::istream& operator>>(std::istream &is,command &newCommand);
+        friend std::ostream& operator<<(std::ostream &os, const command &command);
         char *const * getArguments();
         const char * getCommandName();
-}
+};

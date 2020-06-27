@@ -4,7 +4,7 @@
 
 using namespace std;
 
-command::command(string &command_string)
+command::command(string command_string)
 {
     assign(command_string);
 }
@@ -45,14 +45,21 @@ pair<string, vector<string>> command::parseRaw(string command_string)
 char *const *command::getArguments()
 {
     int number_of_arguments = this->arguments.size();
-    char **arguments = new char *[number_of_arguments];
-
-    for (int index = 0; index < number_of_arguments; index++)
+    char **arguments = new char *[number_of_arguments+2];
+    arguments[0] = const_cast<char *>(this->getCommandName());
+    for (int index = 1; index < number_of_arguments+1; index++)
         arguments[index] = const_cast<char *>(this->arguments[index].c_str());
+    arguments[number_of_arguments+1] = NULL;
 
     return arguments;
 }
 const char *command::getCommandName()
 {
     return this->commandName.c_str();
+}
+
+std::ostream &operator<<(std::ostream &os,const command &command)
+{
+    os << command.commandName;
+    return os;
 }

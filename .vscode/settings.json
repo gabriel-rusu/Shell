@@ -38,6 +38,11 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xutility": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "algorithm": "cpp",
+        "cstdarg": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "xtree": "cpp"
     }
 }
