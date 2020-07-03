@@ -1,6 +1,7 @@
 
 #include "command.hpp"
 #include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -58,8 +59,34 @@ const char *command::getCommandName()
     return this->commandName.c_str();
 }
 
-std::ostream &operator<<(std::ostream &os, const command &command)
+ostream &operator<<(ostream &os, const command &command)
 {
     os << command.commandName;
     return os;
+}
+
+command::operator string() const
+{
+    return this->commandName;
+}
+
+string &ltrim(string &str, const string &chars = "\t\n\v\f\r ")
+{
+    str.erase(0, str.find_first_not_of(chars));
+    return str;
+}
+
+string &rtrim(string &str, const string &chars = "\t\n\v\f\r ")
+{
+    str.erase(str.find_last_not_of(chars) + 1);
+    return str;
+}
+
+command::operator const char *() const
+{
+    string result = "";
+    for (auto argument : arguments)
+        result += argument + " ";
+
+    return ltrim(rtrim(result)).c_str();
 }

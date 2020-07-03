@@ -44,5 +44,6 @@
         "map": "cpp",
         "set": "cpp",
         "xtree": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Enabled"
 }

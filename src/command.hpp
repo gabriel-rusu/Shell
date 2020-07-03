@@ -18,4 +18,6 @@ public:
     friend std::ostream &operator<<(std::ostream &os, const command &command);
     char *const *getArguments();
     const char *getCommandName();
+    operator std::string() const;
+    operator const char *() const;
 };

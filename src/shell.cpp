@@ -2,13 +2,17 @@
 #include <string>
 #include <unistd.h>
 #include <sys/types.h>
+#include "builtin.hpp"
 #include <sys/wait.h>
 
 using namespace std;
 
 bool shell::execute(command &comm)
 {
-    execvp(comm.getCommandName(), comm.getArguments());
+    if (builtin::isKnown(comm))
+        builtin::execute(comm);
+    else
+        execvp(comm.getCommandName(), comm.getArguments());
     return true;
 }
 bool shell::init()
