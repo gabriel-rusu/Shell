@@ -23,7 +23,7 @@ bool shell::init()
 }
 bool shell::start()
 {
-    std::cout << "Welcome to Mini-Sell v2.0" << std::endl;
+    std::cout << "Welcome to Mini-Sell v2.1" << std::endl;
     std::cout << "Enter your commands bellow" << std::endl;
     this->state = RUNNING;
     command comm;

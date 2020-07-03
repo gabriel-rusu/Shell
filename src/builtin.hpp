@@ -11,9 +11,9 @@ private:
     std::map<std::string, int> knownCommands;
     static builtin *instance;
     builtin();
+    static builtin *getInstance();
 
 public:
-    static builtin *getInstance();
     static void execute(command comm);
     static bool isKnown(command comm);
 };
