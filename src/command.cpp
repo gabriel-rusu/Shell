@@ -70,18 +70,7 @@ command::operator string() const
     return this->commandName;
 }
 
-string &ltrim(string &str, const string &chars = "\t\n\v\f\r ")
-{
-    str.erase(0, str.find_first_not_of(chars));
-    return str;
-}
-
-string &rtrim(string &str, const string &chars = "\t\n\v\f\r ")
-{
-    str.erase(str.find_last_not_of(chars) + 1);
-    return str;
-}
-
+ 
 command::operator const char *() const
 {
     string result = "";

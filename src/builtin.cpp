@@ -1,5 +1,6 @@
 #include "builtin.hpp"
 #include <unistd.h>
+#include <sys/resource.h>
 
 using namespace std;
 
@@ -16,12 +17,18 @@ builtin *builtin::getInstance()
 void builtin::execute(command comm)
 {
     builtin *instance = builtin::getInstance();
+    int pid = getpid();
+    int which = PRIO_PROCESS;
     if(!builtin::isKnown(comm))
         return;
     switch (instance->knownCommands[comm])
     {
     case CHDIR:
         chdir(comm);
+        break;
+    case SETPRIORITY:
+        cout<<(const char *)comm<<endl;
+        setpriority(which,pid,atoi(comm));
         break;
     }
 
@@ -38,4 +45,5 @@ builtin::builtin()
     knownCommands["setuid"] = SETUID;
     knownCommands["setguid"] = SETGUID;
     knownCommands["setpriority"] = SETPRIORITY;
+    knownCommands["symlink"] = SYMLINC;
 };
