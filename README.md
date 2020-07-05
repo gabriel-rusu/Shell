@@ -5,8 +5,8 @@
   <img align="center" src="./assets/code.png" width="128" height="128"/>
 </p>
 <h1 align="center">Shell</h1>
-This project consists of a C++ program to serve as a shell interface that accepts user commands and then executes each command in a separate process. This project can be compiled on any Linux, UNIX, or Mac OS X system. A shell interface gives the user a prompt, after which the next command is entered.
 
+This project consists of a C++ program to serve as a shell interface that accepts user commands and then executes each command in a separate process. This project can be compiled on any Linux, UNIX, or Mac OS X system. A shell interface gives the user a prompt, after which the next command is entered.
 
 ## 📝 Table of Contents
 - [About](#about)
@@ -14,7 +14,7 @@ This project consists of a C++ program to serve as a shell interface that accept
 - [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
-- [TODO](../TODO.md)
+- [TODO](./TODO.md)
 - [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
