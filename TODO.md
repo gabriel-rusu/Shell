@@ -1,2 +1,4 @@
 - add support for pipes
 - add support for complex I/O redirection
+- complete the README.md
+- add unittest
