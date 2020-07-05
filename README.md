@@ -15,7 +15,7 @@ This project consists of a C++ program to serve as a shell interface that accept
 - [Usage](#usage)
 - [Built Using](#built_using)
 - [TODO](./TODO.md)
-- [Contributing](../CONTRIBUTING.md)
+<!-- - [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
@@ -70,20 +70,17 @@ Give an example
 Add notes about how to use the system.
 
 ## 🚀 Deployment <a name = "deployment"></a>
-Add additional notes about how to deploy this on a live system.
+Add additional notes about how to deploy this on a live system. -->
 
 ## ⛏️ Built Using <a name = "built_using"></a>
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+- [Visual Studio Code](https://code.visualstudio.com/) - code editor
+- [Linux Subsystem for Linux](https://docs.microsoft.com/en-us/learn/modules/get-started-with-windows-subsystem-for-linux/) - linux development environment
 
 ## ✍️ Authors <a name = "authors"></a>
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+- [@RusuGabriel](https://github.com/RusuGabriel) - Idea & Initial work
 
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
 
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+<!-- ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 - Hat tip to anyone whose code was used
 - Inspiration
-- References
+- References -->
