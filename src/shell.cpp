@@ -7,12 +7,12 @@
 
 using namespace std;
 
-bool shell::execute(command &comm)
+bool shell::execute(simple_command &command)
 {
-    if (builtin::isKnown(comm))
-        builtin::execute(comm);
+    if (builtin::isKnown(command))
+        builtin::execute(command);
     else
-        execvp(comm.getCommandName(), comm.getArguments());
+        execvp(command.getCommandName(), command.getArguments());
     return true;
 }
 bool shell::init()
@@ -26,17 +26,17 @@ bool shell::start()
     std::cout << "Welcome to Mini-Sell v2.1" << std::endl;
     std::cout << "Enter your commands bellow" << std::endl;
     this->state = RUNNING;
-    command comm;
+    simple_command command;
     cout << "~>";
-    while (cin >> comm)
+    while (cin >> command)
     {
-        this->create_in_subshell(comm);
+        this->create_in_subshell(command);
         cout << "~>";
     }
     return true;
 }
 
-bool shell::create_in_subshell(command &comm)
+bool shell::create_in_subshell(simple_command &command)
 {
     int pid = fork();
     if (pid > 0)
@@ -47,12 +47,12 @@ bool shell::create_in_subshell(command &comm)
     else if (pid == 0)
     {
         shell sub_shell;
-        sub_shell.execute(comm);
+        sub_shell.execute(command);
         return true;
     }
     else
     {
-        cout << "Error executing the command: " << comm << endl;
+        cout << "Error executing the command: " << command << endl;
         return false;
     }
 }

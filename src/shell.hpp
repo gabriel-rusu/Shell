@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "command.hpp"
+#include "simple_command.hpp"
 
 class shell
 {
@@ -10,10 +10,10 @@ private:
 
     int pid;
     int state;
-    bool create_in_subshell(command &comm);
+    bool create_in_subshell(simple_command &command);
 
 public:
-    bool execute(command &comm);
+    bool execute(simple_command &command);
     bool init();
     bool start();
 };

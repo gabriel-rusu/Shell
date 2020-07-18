@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-class command
+class simple_command
 {
 private:
     std::string commandName;
@@ -14,9 +14,9 @@ private:
     bool assign(std::string &command_string);
 
 public:
-    command(std::string = "");
-    friend std::istream &operator>>(std::istream &is, command &newCommand);
-    friend std::ostream &operator<<(std::ostream &os, const command &command);
+    simple_command(std::string = "");
+    friend std::istream &operator>>(std::istream &is, simple_command &newCommand);
+    friend std::ostream &operator<<(std::ostream &os, const simple_command &command);
     char *const *getArguments();
     const char *getCommandName();
     operator std::string() const;

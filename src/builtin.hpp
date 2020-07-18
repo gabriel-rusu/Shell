@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "command.hpp"
+#include "simple_command.hpp"
 #include "utils.hpp"
 #include <map>
 
@@ -14,6 +14,6 @@ private:
     static builtin *getInstance();
 
 public:
-    static void execute(command comm);
-    static bool isKnown(command comm);
+    static void execute(simple_command command);
+    static bool isKnown(simple_command command);
 };

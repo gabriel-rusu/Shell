@@ -14,21 +14,21 @@ builtin *builtin::getInstance()
         return instance = new builtin();
 }
 
-void builtin::execute(command comm)
+void builtin::execute(simple_command command)
 {
     builtin *instance = builtin::getInstance();
     int pid;
     int which = PRIO_PROCESS;
-    if (!builtin::isKnown(comm))
+    if (!builtin::isKnown(command))
         return;
-    switch (instance->knownCommands[comm])
+    switch (instance->knownCommands[command])
     {
     case CHDIR:
-        chdir(comm);
+        chdir(command);
         break;
     case SETPRIORITY:
         pid = getpid();
-        int ret = setpriority(which, pid, atoi(comm));
+        int ret = setpriority(which, pid, atoi(command));
         if(ret == -1){
             cout<<"Failed to change the priority of process with PID "<<pid<<endl;
             cout<<"Error no is: "<<errno<<endl;
@@ -38,10 +38,10 @@ void builtin::execute(command comm)
         break;
     }
 }
-bool builtin::isKnown(command comm)
+bool builtin::isKnown(simple_command command)
 {
     builtin *instance = builtin::getInstance();
-    return instance->knownCommands.find(comm) != instance->knownCommands.end();
+    return instance->knownCommands.find(command) != instance->knownCommands.end();
 }
 
 builtin::builtin()

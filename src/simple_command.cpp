@@ -1,16 +1,17 @@
 
-#include "command.hpp"
+#include "simple_command.hpp"
 #include <sstream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
-command::command(string command_string)
+simple_command::simple_command(string command_string)
 {
     assign(command_string);
 }
 
-istream &operator>>(istream &is, command &newCommand)
+istream &operator>>(istream &is, simple_command &newCommand)
 {
     string command_string;
     getline(is, command_string);
@@ -18,7 +19,7 @@ istream &operator>>(istream &is, command &newCommand)
     return is;
 }
 
-bool command::assign(string &command_string)
+bool simple_command::assign(string &command_string)
 {
     if (command_string.length() == 0)
         return false;
@@ -28,7 +29,7 @@ bool command::assign(string &command_string)
     return true;
 }
 
-pair<string, vector<string>> command::parseRaw(string command_string)
+pair<string, vector<string>> simple_command::parseRaw(string command_string)
 {
     string commandName;
     string arg;
@@ -43,7 +44,7 @@ pair<string, vector<string>> command::parseRaw(string command_string)
     return make_pair(commandName, args);
 }
 
-char *const *command::getArguments()
+char *const *simple_command::getArguments()
 {
     int number_of_arguments = this->arguments.size();
     char **arguments = new char *[number_of_arguments + 2];
@@ -54,24 +55,23 @@ char *const *command::getArguments()
 
     return arguments;
 }
-const char *command::getCommandName()
+const char *simple_command::getCommandName()
 {
     return this->commandName.c_str();
 }
 
-ostream &operator<<(ostream &os, const command &command)
+ostream &operator<<(ostream &os, const simple_command &command)
 {
     os << command.commandName;
     return os;
 }
 
-command::operator string() const
+simple_command::operator string() const
 {
     return this->commandName;
 }
 
- 
-command::operator const char *() const
+simple_command::operator const char *() const
 {
     string result = "";
     for (auto argument : arguments)
