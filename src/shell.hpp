@@ -10,10 +10,13 @@ private:
 
     int pid;
     int state;
-    bool create_in_subshell(simple_command &command);
+    bool create_in_subshell(simple_command command);
+    bool create_in_subshell(simple_command command, int input_fd, int output_fd);
 
 public:
-    bool execute(simple_command &command);
+    bool execute(simple_command command);
     bool init();
     bool start();
+    static int analyze(std::string &command);
+    static std::vector<simple_command> split(std::string &command);
 };

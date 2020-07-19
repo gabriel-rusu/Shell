@@ -4,10 +4,12 @@
 #include <sys/types.h>
 #include "builtin.hpp"
 #include <sys/wait.h>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 
-bool shell::execute(simple_command &command)
+bool shell::execute(simple_command command)
 {
     if (builtin::isKnown(command))
         builtin::execute(command);
@@ -26,17 +28,25 @@ bool shell::start()
     std::cout << "Welcome to Mini-Sell v2.1" << std::endl;
     std::cout << "Enter your commands bellow" << std::endl;
     this->state = RUNNING;
-    simple_command command;
+    string command_string;
     cout << "~>";
-    while (cin >> command)
+    while (getline(cin, command_string))
     {
-        this->create_in_subshell(command);
+        if (shell::analyze(command_string) == SINGLE_COMMAND)
+        {
+            this->create_in_subshell(simple_command(command_string));
+        }
+        else
+        {
+            for (auto element : shell::split(command_string))
+                this->create_in_subshell();
+        }
         cout << "~>";
     }
     return true;
 }
 
-bool shell::create_in_subshell(simple_command &command)
+bool shell::create_in_subshell(simple_command command)
 {
     int pid = fork();
     if (pid > 0)
@@ -55,4 +65,37 @@ bool shell::create_in_subshell(simple_command &command)
         cout << "Error executing the command: " << command << endl;
         return false;
     }
+}
+
+int shell::analyze(string &command)
+{
+    return command.find("|") != string::npos ? COMPOUND_COMMAND : SINGLE_COMMAND;
+}
+
+vector<simple_command> shell::split(string &command)
+{
+    vector<simple_command> result;
+    stringstream ss(command);
+    string word, current_command = "";
+    while (ss >> word)
+    {
+        if (word == "|")
+        {
+            result.push_back(current_command);
+            current_command = "";
+        }
+        else
+        {
+            current_command += (word + " ");
+        }
+    }
+    if (current_command.size() != 0)
+        result.push_back(current_command);
+    return result;
+}
+
+// implement fork() exec() and dup2() to achieve execution of piped commands
+bool shell::create_in_subshell(simple_command command, int input_fd, int output_fd)
+{
+    return true;
 }
