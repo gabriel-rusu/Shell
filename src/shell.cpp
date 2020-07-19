@@ -38,8 +38,8 @@ bool shell::start()
         }
         else
         {
-            for (auto element : shell::split(command_string))
-                this->create_in_subshell();
+            for (auto command : shell::split(command_string))
+                this->create_in_subshell(command); //TODO: add pipes file descriptors
         }
         cout << "~>";
     }
