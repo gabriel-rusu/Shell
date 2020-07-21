@@ -38,8 +38,19 @@ bool shell::start()
         }
         else
         {
-            for (auto command : shell::split(command_string))
-                this->create_in_subshell(command); //TODO: add pipes file descriptors
+            vector<simple_command> commands = shell::split(command_string);
+            int length = commands.size();
+            int *pipes[length - 1];
+            for (int* & spipe : pipes)
+            {
+                spipe = new int[2];
+                pipe(spipe);
+                cout << spipe[0] << " " << spipe[1] << endl;
+            }
+
+            for (int index =0 ;index < length; index++){
+                this->create_in_subshell(command,pipes[]); //TODO: add pipes file descriptors
+            }
         }
         cout << "~>";
     }
@@ -97,5 +108,21 @@ vector<simple_command> shell::split(string &command)
 // implement fork() exec() and dup2() to achieve execution of piped commands
 bool shell::create_in_subshell(simple_command command, int input_fd, int output_fd)
 {
-    return true;
+    int pid = fork();
+    if (pid == 0)
+    {
+        if (input_fd > 0)
+            dup2(input_fd, STDIN_FILENO);
+        if (output_fd > 0)
+            dup2(output_fd, STDOUT_FILENO);
+        shell sub_shell;
+        sub_shell.execute(command);
+        return true;
+    }
+    else if (pid > 0)
+    {
+        wait(NULL);
+        return true;
+    }
+    return false;
 }
