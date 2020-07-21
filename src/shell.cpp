@@ -41,16 +41,22 @@ bool shell::start()
             vector<simple_command> commands = shell::split(command_string);
             int length = commands.size();
             int *pipes[length - 1];
-            for (int* & spipe : pipes)
+            for (int *&spipe : pipes)
             {
                 spipe = new int[2];
                 pipe(spipe);
                 cout << spipe[0] << " " << spipe[1] << endl;
             }
 
-            for (int index =0 ;index < length; index++){
-                this->create_in_subshell(command,pipes[]); //TODO: add pipes file descriptors
-            }
+            // for (int index = 0; index < length - 1; index++)
+            // {
+            cout << "Input: " << pipes[0][0] << endl;
+            this->create_in_subshell(commands[0], -1, pipes[0][1]);
+            this->create_in_subshell(commands[1], pipes[0][0], -1);
+            close(pipes[0][1]);
+            close(pipes[0][0]);
+
+            // }
         }
         cout << "~>";
     }
@@ -122,6 +128,10 @@ bool shell::create_in_subshell(simple_command command, int input_fd, int output_
     else if (pid > 0)
     {
         wait(NULL);
+        if (input_fd > 0)
+            close(input_fd);
+        if (output_fd > 0)
+            close(output_fd);
         return true;
     }
     return false;
