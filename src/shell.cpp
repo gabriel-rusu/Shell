@@ -48,7 +48,7 @@ bool shell::start()
                 cout << spipe[0] << " " << spipe[1] << endl;
             }
 
-            // for (int index = 0; index < length - 1; index++)
+            // for (int index = 0; index < length - 1; index++) //TODO: add support for unlimited processes in a piped command
             // {
             cout << "Input: " << pipes[0][0] << endl;
             this->create_in_subshell(commands[0], -1, pipes[0][1]);
@@ -111,7 +111,6 @@ vector<simple_command> shell::split(string &command)
     return result;
 }
 
-// implement fork() exec() and dup2() to achieve execution of piped commands
 bool shell::create_in_subshell(simple_command command, int input_fd, int output_fd)
 {
     int pid = fork();
