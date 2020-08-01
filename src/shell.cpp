@@ -48,17 +48,20 @@ bool shell::start()
                 cout << spipe[0] << " " << spipe[1] << endl;
             }
 
-            // for (int index = 0; index < length - 1; index++) //TODO: add support for unlimited processes in a piped command
-            // {
-            cout << "Input: " << pipes[0][0] << endl;
-            this->create_in_subshell(commands[0], -1, pipes[0][1]);
-            this->create_in_subshell(commands[1], pipes[0][0], -1);
-            close(pipes[0][1]);
-            close(pipes[0][0]);
-
-            // }
+            for (int index = 0; index < length - 1; index++) //TODO: add support for unlimited processes in a piped command
+            {
+                int std_in, std_out;
+                std_in = index != 0 ? pipes[index - 1][0] : -1;
+                std_out = index + 1 < length ? pipes[index][1] : -1;
+                this->create_in_subshell(commands[index], std_in, std_out);
+            }
+            for (auto pipe : pipes)
+            {
+                close(pipe[0]);
+                close(pipe[1]);
+            }
         }
-        cout << "~>";
+        cout << "~> ";
     }
     return true;
 }
