@@ -25,11 +25,11 @@ bool shell::init()
 }
 bool shell::start()
 {
-    std::cout << "Welcome to Mini-Sell v2.1" << std::endl;
+    std::cout << "Welcome to Mini-Sell v3.0" << std::endl;
     std::cout << "Enter your commands bellow" << std::endl;
     this->state = RUNNING;
     string command_string;
-    cout << "~>";
+    cout << "~> ";
     while (getline(cin, command_string))
     {
         if (shell::analyze(command_string) == SINGLE_COMMAND)
@@ -45,10 +45,9 @@ bool shell::start()
             {
                 spipe = new int[2];
                 pipe(spipe);
-                cout << spipe[0] << " " << spipe[1] << endl;
             }
 
-            for (int index = 0; index < length - 1; index++) //TODO: add support for unlimited processes in a piped command
+            for (int index = 0; index < length; index++) //TODO: add support for unlimited processes in a piped command
             {
                 int std_in, std_out;
                 std_in = index != 0 ? pipes[index - 1][0] : -1;
