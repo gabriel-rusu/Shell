@@ -47,7 +47,7 @@ bool shell::start()
                 pipe(spipe);
             }
 
-            for (int index = 0; index < length; index++) //TODO: add support for unlimited processes in a piped command
+            for (int index = 0; index < length; index++)
             {
                 int std_in, std_out;
                 std_in = index != 0 ? pipes[index - 1][0] : -1;
